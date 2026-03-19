@@ -88,3 +88,18 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error(err);
         });
 });
+
+document.getElementById('b1').addEventListener('click', () => {
+    const id = parseInt(document.getElementById('i1').value);
+
+    fetch(`http://localhost:3000/product/${id}`).then((data) => {
+        if(data.ok){
+            return data.json();
+        }throw (alert(data.statusText + '\nLivro não encontrado'))
+    }).then((data) => {
+        const b = document.querySelector('.books');
+        b.innerHTML = "";
+
+        b.appendChild(newBook(data));
+    })
+})
